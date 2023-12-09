@@ -2,10 +2,28 @@ package com.worldonetop.ourry.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val Primary10 = Color(0xFFE5EFFE)
+val Primary20 = Color(0xFFC1D0FF)
+val Primary30 = Color(0xFF9AC8FF)
+val Primary40 = Color(0xFF58B1F2)
+val Primary50 = Color(0xFF0F99F2)
+val Primary60 = Color(0xFF1780CD)
+val Primary70 = Color(0xFF2E4BA8)
+val Primary80 = Color(0xFF0E1F57)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Gray10 = Color(0xFFECEEF1)
+val Gray20 = Color(0xFFCFD3D8)
+val Gray30 = Color(0xFFB3B7BE)
+val Gray40 = Color(0xFF989DA5)
+val Gray50 = Color(0xFF7D838B)
+val Gray60 = Color(0xFF646A72)
+val Gray70 = Color(0xFF4C5158)
+val Gray80 = Color(0xFF35393F)
+
+val Error = Color(0xFFFF0000)
+val Warring = Color(0xFFFFAB0F)
+val Success = Color(0xFF7BFF0F)
+val Complete = Color(0xFF4E87F1)
+
+val BackgroundPrimary = Color(0xFFFFFFFF)
+val BackgroundSecondary = Color(0xFFF6F6F6)
