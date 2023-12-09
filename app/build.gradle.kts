@@ -1,16 +1,20 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.agp)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
     namespace = "com.worldonetop.ourry"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.worldonetop.ourry"
-        minSdk = 21
-        targetSdk = 33
+        minSdk = 24
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -33,15 +37,41 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+//    kotlin {
+//        jvmToolchain(8)
+//    }
+    viewBinding{
+        enable = true
+    }
+    dataBinding{
+        enable = true
+    }
 }
 
 dependencies {
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.bundles.coroutine)
+    implementation(libs.activity)
+    implementation(libs.fragment)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.paging)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
+    implementation(libs.bundles.navigation)
+    implementation(libs.security.crypto)
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
+
 }
