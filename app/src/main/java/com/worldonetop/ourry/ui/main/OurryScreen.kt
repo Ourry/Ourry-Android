@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.worldonetop.ourry.ui.screen.login.LoginScreen
 
 
 @Composable
@@ -28,7 +29,7 @@ fun OurryScreen(
             startDestination = Screens.Login.route,
         ) {
             composable(Screens.Login.route){
-                Text(Screens.Login.route)
+                LoginScreen(navController)
             }
         }
     }

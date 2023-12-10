@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Ourry</string>
+
+    <!-- login -->
+    <string name="email_placeholder">abc@naver.com</string>
+    <string name="email_error_text">이메일을 입력해주세요.</string>
+    <string name="pw_placeholder">******</string>
+    <string name="pw_error_text">비밀번호를 입력해주세요.</string>
+    <string name="set_auto_login">자동로그인 설정</string>
+    <string name="anonymous_login">비회원으로 로그인</string>
+    <string name="reset_pw">비밀번호 재설정</string>
+    <string name="signup">회원가입</string>
+    <string name="login">로그인</string>
 </resources>
