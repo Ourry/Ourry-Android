@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.worldonetop.ourry.ui.screen.login.LoginScreen
+import com.worldonetop.ourry.ui.screen.signup.SignupScreen
 
 
 @Composable
@@ -30,6 +31,9 @@ fun OurryScreen(
         ) {
             composable(Screens.Login.route){
                 LoginScreen(navController)
+            }
+            composable(Screens.Signup.route){
+                SignupScreen(navController)
             }
         }
     }
