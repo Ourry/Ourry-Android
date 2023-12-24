@@ -85,6 +85,8 @@ class SignupViewModel @Inject constructor(
                 emailInputEnabled = false,
                 emailSendEnabled = false,
                 showEmailError = false,
+                emailCert = "",
+                isEmailScreenComplete = false
             )
         }
         viewModelScope.launch {

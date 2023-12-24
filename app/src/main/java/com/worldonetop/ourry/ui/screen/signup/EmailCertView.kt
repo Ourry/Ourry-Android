@@ -81,7 +81,7 @@ fun EmailCertView(
             Spacer(modifier = Modifier.height(24.dp))
 
             EmailCertSection(
-                keyboardType = KeyboardType.Number,
+                keyboardType = KeyboardType.Text,
                 value = state.emailCert,
                 onValue = onCert,
                 placeholder = stringResource(id = R.string.email_cert_check_placeholder),

@@ -1,6 +1,10 @@
 package com.worldonetop.ourry.util.extension
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -44,5 +48,16 @@ fun <T> ViewModel.updateFlowFromCoroutine(flow: MutableSharedFlow<T>, settingLis
                 flow.emit(settingListener(it))
             }
         }
+    }
+}
+
+
+/** ripple 비활성화 클릭 이벤트 **/
+inline fun Modifier.clickableNoRipple(crossinline onClick: ()->Unit): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }
+    ) {
+        onClick()
     }
 }

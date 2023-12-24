@@ -39,7 +39,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.worldonetop.ourry.R
 import com.worldonetop.ourry.ui.component.input.InputField
-import com.worldonetop.ourry.ui.main.Screens
+import com.worldonetop.ourry.ui.core.Screens
 import com.worldonetop.ourry.ui.theme.BackgroundPrimaryColor
 import com.worldonetop.ourry.ui.theme.BackgroundSecondaryColor
 import com.worldonetop.ourry.ui.theme.BodyTextStyle
@@ -47,6 +47,7 @@ import com.worldonetop.ourry.ui.theme.ErrorColor
 import com.worldonetop.ourry.ui.theme.Gray50
 import com.worldonetop.ourry.ui.theme.Primary40
 import com.worldonetop.ourry.ui.theme.Primary50
+import com.worldonetop.ourry.util.extension.clickableNoRipple
 
 
 @Preview(showSystemUi = true)
@@ -133,24 +134,27 @@ private fun LoginUI(
             }
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         Text(
             text = stringResource(id = R.string.reset_pw),
             style = BodyTextStyle,
-            modifier = Modifier.clickable {
-
-            }
+            modifier = Modifier
+                .padding(5.dp)
+                .clickableNoRipple {
+                    navController.navigate(Screens.ResetPassword.route)
+                }
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = stringResource(id = R.string.anonymous_login),
             style = BodyTextStyle,
-            modifier = Modifier.clickable {
-
-            }
+            modifier = Modifier
+                .padding(5.dp)
+                .clickableNoRipple {
+                }
         )
     }
 }
