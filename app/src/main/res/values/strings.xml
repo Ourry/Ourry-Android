@@ -45,7 +45,7 @@
 
 
     <string name="signup_complete">회원가입 완료</string>
-    <string name="rest_pw_complete">비밀번호 변경하기</string>
+    <string name="reset_pw_complete">비밀번호 변경하기</string>
 
 
 

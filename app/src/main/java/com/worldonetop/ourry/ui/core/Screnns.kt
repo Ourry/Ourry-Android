@@ -1,4 +1,4 @@
-package com.worldonetop.ourry.ui.main
+package com.worldonetop.ourry.ui.core
 
 
 sealed class Screens(val route: String) {

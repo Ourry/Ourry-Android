@@ -1,19 +1,15 @@
-package com.worldonetop.ourry.ui.main
+package com.worldonetop.ourry.ui.core
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.worldonetop.ourry.ui.screen.login.LoginScreen
+import com.worldonetop.ourry.ui.screen.reset_pw.ResetPwScreen
 import com.worldonetop.ourry.ui.screen.signup.SignupScreen
 
 
@@ -34,6 +30,9 @@ fun OurryScreen(
             }
             composable(Screens.Signup.route){
                 SignupScreen(navController)
+            }
+            composable(Screens.ResetPassword.route){
+                ResetPwScreen(navController)
             }
         }
     }
