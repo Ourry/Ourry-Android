@@ -34,7 +34,8 @@ private fun SignupPreview(){
     SignupUI(
         rememberNavController(),
         SignupViewModel(),
-        SignupUiState()
+        SignupUiState(),
+        {}
     )
 }
 @Composable
@@ -44,7 +45,9 @@ fun SignupScreen(
 ) {
     val uiState by signupViewModel.uiState.collectAsStateWithLifecycle()
 
-    SignupUI(navController, signupViewModel, uiState)
+    SignupUI(navController, signupViewModel, uiState) {
+        navController.popBackStack()
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -53,6 +56,7 @@ private fun SignupUI(
     navController: NavController,
     viewModel: SignupViewModel,
     uiState: SignupUiState,
+    onBack: ()->Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = {
@@ -126,7 +130,7 @@ private fun SignupUI(
                 text = stringResource(id = R.string.back),
                 onClick = {
                     if(pagerState.currentPage == 0){
-
+                        onBack()
                     }
                     else
                         coroutineScope.launch {

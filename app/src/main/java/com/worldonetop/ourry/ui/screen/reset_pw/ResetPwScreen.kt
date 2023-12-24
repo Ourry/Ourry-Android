@@ -38,7 +38,8 @@ private fun ResetPwPreview(){
     ResetPwUI(
         rememberNavController(),
         SignupViewModel(),
-        SignupUiState()
+        SignupUiState(),
+        { }
     )
 }
 @Composable
@@ -48,7 +49,9 @@ fun ResetPwScreen(
 ) {
     val uiState by signupViewModel.uiState.collectAsStateWithLifecycle()
 
-    ResetPwUI(navController, signupViewModel, uiState)
+    ResetPwUI(navController, signupViewModel, uiState) {
+        navController.popBackStack()
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -57,6 +60,7 @@ private fun ResetPwUI(
     navController: NavController,
     viewModel: SignupViewModel,
     uiState: SignupUiState,
+    onBack: ()->Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = {
@@ -123,7 +127,7 @@ private fun ResetPwUI(
                 text = stringResource(id = R.string.back),
                 onClick = {
                     if(pagerState.currentPage == 0){
-
+                        onBack()
                     }
                     else
                         coroutineScope.launch {
