@@ -1,9 +1,19 @@
 <resources>
+    <!-- core -->
     <string name="app_name">Ourry</string>
+    <string name="back">뒤로가기</string>
+    <string name="cancel">취소하기</string>
+
+
+    <!-- common -->
+    <string name="email_placeholder">abc@naver.com</string>
+    <string name="email_error">이메일을 입력해주세요.</string>
+    <string name="next_page">다음화면으로 이동</string>
+    <string name="pw">비밀번호</string>
+    <string name="nickname">닉네임</string>
+
 
     <!-- login -->
-    <string name="email_placeholder">abc@naver.com</string>
-    <string name="email_error_text">이메일을 입력해주세요.</string>
     <string name="pw_placeholder">******</string>
     <string name="pw_error_text">비밀번호를 입력해주세요.</string>
     <string name="set_auto_login">자동로그인 설정</string>
@@ -11,4 +21,32 @@
     <string name="reset_pw">비밀번호 재설정</string>
     <string name="signup">회원가입</string>
     <string name="login">로그인</string>
+
+
+    <!-- signup & reset pw -->
+    <string name="email_cert_title">이메일 인증</string>
+    <string name="email_cert_send">인증번호 발송</string>
+    <string name="email_cert_placeholder">회원가입 시 등록한 이메일을 입력해주세요.</string>
+    <string name="email_cert_check_placeholder">인증 번호를 입력해주세요</string>
+    <string name="email_cert_check">인증번호 확인</string>
+    <string name="email_cert_check_error">인증번호가 일치하지 않습니다.</string>
+    <string name="email_cert_complete">인증이 완료되었습니다.</string>
+
+    <string name="new_pw">새 비밀번호</string>
+    <string name="new_pw_check">새 비밀번호 확인</string>
+    <string name="pw_error">8~16자의 영문 대소문자, 숫자, 특수문자를 사용해 주세요.</string>
+    <string name="pw_check_error">새 비밀번호와 일치하지 않습니다. 다시 확인해주세요.</string>
+
+    <string name="nickname_placeholder">홍길동</string>
+    <string name="nickname_error">닉네임에는 특수문자가 포함될 수 없습니다. 다시 확인해주세요.</string>
+    <string name="phone_number">휴대폰 번호</string>
+    <string name="phone_number_placeholder">01012345678</string>
+    <string name="phone_number_error">휴대폰 번호를 입력해주세요</string>
+
+
+    <string name="signup_complete">회원가입 완료</string>
+    <string name="reset_pw_complete">비밀번호 변경하기</string>
+
+
+
 </resources>

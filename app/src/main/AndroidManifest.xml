@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Ourry"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.OurryActivity"
+            android:name=".ui.core.OurryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
