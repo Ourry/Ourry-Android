@@ -15,9 +15,6 @@ class AccountDao @Inject constructor(
     private val ROOT_KEY = "ACCOUNT"
     private val gson = Gson()
 
-    init {
-        Log.d("asd","@@@@@@@@@@@@@@@@ da0  create")
-    }
 
     fun deleteInfo(){
         pref.edit {

@@ -3,6 +3,7 @@ package com.worldonetop.ourry.repository
 import android.util.Log
 import com.worldonetop.ourry.di.manager.network.onFail
 import com.worldonetop.ourry.di.manager.network.onSuccess
+import com.worldonetop.ourry.di.manager.network.suspendOnFail
 import com.worldonetop.ourry.di.manager.network.transform
 import com.worldonetop.ourry.model.remote.MemberTable
 import com.worldonetop.ourry.model.domain.ApiResponse
@@ -24,7 +25,10 @@ class MemberRepository @Inject constructor(
 
         return api.login(
             input.toTable().copy(id = null)
-        ).transform {
+        ).onFail {
+            if(this is ApiResponse.Failure.Fail)
+                logout()
+        }.transform {
             dao.saveInfo(
                 input.copy(
                     token = it.getString("jwt")
@@ -70,5 +74,9 @@ class MemberRepository @Inject constructor(
             "newPassword" to pw,
             "confirmPassword" to confirmPw
         )))
+    }
+
+    fun logout(){
+        dao.deleteInfo()
     }
 }
