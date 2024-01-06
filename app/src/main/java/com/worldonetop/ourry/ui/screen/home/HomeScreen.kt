@@ -185,8 +185,16 @@ fun HomeScreen(
                 exit = slideOutVertically{ it*2 }
             ) {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
-                    shape = CircleShape,) {
+                    onClick = {  },
+                    shape = CircleShape,
+                    containerColor = Primary60,
+                    contentColor = BackgroundPrimaryColor
+                ) {
+                    Icon(
+                        modifier = Modifier.size(24.dp),
+                        painter = painterResource(id = R.drawable.ic_write),
+                        contentDescription = null
+                    )
                 }
             }
         }
