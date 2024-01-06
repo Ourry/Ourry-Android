@@ -124,6 +124,7 @@ private fun LoginUI(
             }
             Spacer(modifier = Modifier.width(12.dp))
             DefaultButton(stringResource(id = R.string.login)){
+                navController.navigate(Screens.Home.route)
                 if(id.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(id).matches())
                     idError = true
                 if(pw.isEmpty())
