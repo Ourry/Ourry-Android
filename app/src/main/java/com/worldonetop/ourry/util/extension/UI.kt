@@ -91,18 +91,20 @@ fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
 fun Int.pxToDp() = with(LocalDensity.current) { this@pxToDp.toDp() }
 
 fun Date.formatUIString(): String{
-    val currentTime = Calendar.getInstance().time
-    val diff = currentTime.time - time
+    val currentTime = Calendar.getInstance()
 
-    val seconds = diff / 1000
-    val minutes = seconds / 60
+    val minutes = (currentTime.timeInMillis - time) / 1000 / 60
     val hours = minutes / 60
-    val days = hours / 24
 
-    return when {
-        minutes < 60 -> "${minutes}분 전"
-        hours < 24 -> "${hours}시간 전"
-        days < 365 -> SimpleDateFormat("MM/dd", Locale.getDefault()).format(this)
-        else -> SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(this)
-    }
+    if(minutes < 60)
+        return "${minutes}분 전"
+    else if(hours < 24)
+        return "${hours}시간 전"
+
+    val toCalendar = Calendar.getInstance().apply { time = this@formatUIString }
+
+    if(toCalendar.get(Calendar.YEAR) == currentTime.get(Calendar.YEAR))
+        return SimpleDateFormat("MM/dd", Locale.getDefault()).format(this)
+    else
+        return SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(this)
 }
