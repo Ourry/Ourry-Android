@@ -12,6 +12,7 @@ import com.worldonetop.ourry.ui.screen.home.HomeScreen
 import com.worldonetop.ourry.ui.screen.login.LoginScreen
 import com.worldonetop.ourry.ui.screen.reset_pw.ResetPwScreen
 import com.worldonetop.ourry.ui.screen.signup.SignupScreen
+import com.worldonetop.ourry.ui.screen.write.WriteScreen
 
 
 @Composable
@@ -37,6 +38,9 @@ fun OurryScreen(
             }
             composable(Screens.Home.route){
                 HomeScreen(navController)
+            }
+            composable(Screens.Write.route){
+                WriteScreen(navController)
             }
         }
     }

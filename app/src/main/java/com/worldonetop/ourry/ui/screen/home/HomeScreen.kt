@@ -107,6 +107,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.worldonetop.ourry.R
+import com.worldonetop.ourry.ui.component.box.BlueShadow
+import com.worldonetop.ourry.ui.core.Screens
 import com.worldonetop.ourry.ui.theme.BackgroundPrimaryColor
 import com.worldonetop.ourry.ui.theme.BodyTextStyle
 import com.worldonetop.ourry.ui.theme.Gray10
@@ -185,7 +187,7 @@ fun HomeScreen(
                 exit = slideOutVertically{ it*2 }
             ) {
                 FloatingActionButton(
-                    onClick = {  },
+                    onClick = { navController.navigate(Screens.Write.route) },
                     shape = CircleShape,
                     containerColor = Primary60,
                     contentColor = BackgroundPrimaryColor
@@ -339,20 +341,16 @@ private fun ContentItem(
     time: Date = Date(),
     onClick: ()->Unit = {},
 ) {
-    Box(
+
+    BlueShadow(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = default_horizontal_padding, vertical = 4.dp)
-            .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(size = 18.dp),
-                ambientColor = Primary20,
-                spotColor = Primary20
-            )
-            .background(BackgroundPrimaryColor)
-            .padding(default_horizontal_padding)
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+            .padding(default_horizontal_padding)
+        ) {
             Text(
                 text = title,
                 style = LargeTextStyle,
