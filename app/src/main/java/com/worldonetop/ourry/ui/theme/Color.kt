@@ -26,4 +26,4 @@ val SuccessColor = Color(0xFF7BFF0F)
 val CompleteColor = Color(0xFF4E87F1)
 
 val BackgroundPrimaryColor = Color(0xFFFFFFFF)
-val BackgroundSecondaryColor = Color(0xFFF6F6F6)
+val BackgroundSecondaryColor = Color(0xFFF9F9F9)
