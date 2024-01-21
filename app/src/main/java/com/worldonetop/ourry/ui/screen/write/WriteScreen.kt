@@ -1,6 +1,5 @@
 package com.worldonetop.ourry.ui.screen.write
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -8,13 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -28,18 +25,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,6 +58,7 @@ import com.worldonetop.ourry.ui.theme.Gray30
 import com.worldonetop.ourry.ui.theme.Gray60
 import com.worldonetop.ourry.ui.theme.Gray70
 import com.worldonetop.ourry.ui.theme.LargeTextStyle
+import com.worldonetop.ourry.ui.theme.Primary20
 import com.worldonetop.ourry.ui.theme.Primary60
 import com.worldonetop.ourry.ui.theme.SmallTextStyle
 import com.worldonetop.ourry.ui.theme.default_horizontal_padding
@@ -136,9 +133,10 @@ fun WriteScreen(
 
             RowInput(
                 value = body,
-                onValueChange = { if(it.length <= 300) body = it },
+                onValueChange = { body = it },
                 headerText = stringResource(id = R.string.write_content_header),
                 singleLine = false,
+                maxLength = 300,
                 onDelete = null,
             )
 
@@ -313,7 +311,7 @@ private fun SelectCategory(
     currentCategory: String? = null,
     items: List<String> = emptyList()
 ) {
-    var category by remember { mutableStateOf(currentCategory) }
+    val category by remember { mutableStateOf(currentCategory) }
     val scrollState = rememberScrollState()
 
     if (isShow) {
@@ -387,8 +385,11 @@ private fun RowInput(
     onValueChange: (String) -> Unit,
     headerText: String? = null,
     singleLine: Boolean = true,
+    maxLength: Int? = null,
     onDelete: (() -> Unit)? = null,
 ) {
+    var isFocus by remember { mutableStateOf(false)}
+
     Column {
         headerText?.let {
             Text(
@@ -405,29 +406,57 @@ private fun RowInput(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = default_horizontal_padding)
-        ) {
-            Row {
-                InputField(
-                    modifier = Modifier
-                        .weight(1f)
-                        .conditional(!singleLine) {
-                            defaultMinSize(minHeight =  160.dp)
-                        }
-                    ,
-                    value = value,
-                    onValueChange = onValueChange,
-                    contentPadding = PaddingValues(
-                        horizontal = default_horizontal_padding,
-                        vertical = 8.dp
-                    ),
-                    textStyle = DefaultTextStyle,
-                    singleLine = singleLine
-                )
-                onDelete?.let {
-                    IconButton(onClick = it) {
-                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
-                    }
+                .conditional(isFocus){
+                    border(
+                        1.dp,
+                        Primary20,
+                        RoundedCornerShape(8.dp)
+                    )
                 }
+        ) {
+            InputField(
+                modifier = Modifier
+                    .conditional(!singleLine) {
+                        defaultMinSize(minHeight = 160.dp)
+                    }
+                    .conditional(maxLength != null) {
+                        padding(bottom = 20.dp)
+                    }
+                    .onFocusChanged { isFocus = it.isFocused }
+                ,
+                value = value,
+                onValueChange = { if(maxLength == null || it.length <= maxLength) onValueChange(it) },
+                contentPadding = PaddingValues(
+                    horizontal = default_horizontal_padding,
+                    vertical = 8.dp
+                ),
+                textStyle = DefaultTextStyle,
+                singleLine = singleLine,
+                trailing = onDelete?.let {
+                    {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            modifier = Modifier.clickableNoRipple { it() }
+                        )
+                    }
+                },
+            )
+
+            maxLength?.let {
+                    Row(
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 10.dp, vertical = 5.dp)
+                    ) {
+                        Text(
+                            text = value.length.toString(),
+                        )
+                        Text(
+                            text = "/$it",
+                            color = Gray30
+                        )
+                    }
             }
         }
     }
