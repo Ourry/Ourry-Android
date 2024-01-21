@@ -136,9 +136,10 @@ fun WriteScreen(
 
             RowInput(
                 value = body,
-                onValueChange = { if(it.length <= 300) body = it },
+                onValueChange = { body = it },
                 headerText = stringResource(id = R.string.write_content_header),
                 singleLine = false,
+                maxLength = 300,
                 onDelete = null,
             )
 
@@ -387,6 +388,7 @@ private fun RowInput(
     onValueChange: (String) -> Unit,
     headerText: String? = null,
     singleLine: Boolean = true,
+    maxLength: Int? = null,
     onDelete: (() -> Unit)? = null,
 ) {
     Column {
@@ -406,28 +408,48 @@ private fun RowInput(
                 .fillMaxWidth()
                 .padding(horizontal = default_horizontal_padding)
         ) {
-            Row {
-                InputField(
-                    modifier = Modifier
-                        .weight(1f)
-                        .conditional(!singleLine) {
-                            defaultMinSize(minHeight =  160.dp)
-                        }
-                    ,
-                    value = value,
-                    onValueChange = onValueChange,
-                    contentPadding = PaddingValues(
-                        horizontal = default_horizontal_padding,
-                        vertical = 8.dp
-                    ),
-                    textStyle = DefaultTextStyle,
-                    singleLine = singleLine
-                )
-                onDelete?.let {
-                    IconButton(onClick = it) {
-                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
+            InputField(
+                modifier = Modifier
+                    .conditional(!singleLine) {
+                        defaultMinSize(minHeight = 160.dp)
                     }
-                }
+                    .conditional(maxLength != null) {
+                        padding(bottom = 20.dp)
+                    }
+                ,
+                value = value,
+                onValueChange = { if(maxLength == null || value.length < maxLength) onValueChange(it) },
+                contentPadding = PaddingValues(
+                    horizontal = default_horizontal_padding,
+                    vertical = 8.dp
+                ),
+                textStyle = DefaultTextStyle,
+                singleLine = singleLine,
+                trailing = onDelete?.let {
+                    {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            modifier = Modifier.clickableNoRipple { it() }
+                        )
+                    }
+                },
+            )
+
+            maxLength?.let {
+                    Row(
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 10.dp, vertical = 5.dp)
+                    ) {
+                        Text(
+                            text = value.length.toString(),
+                        )
+                        Text(
+                            text = "/$it",
+                            color = Gray30
+                        )
+                    }
             }
         }
     }
