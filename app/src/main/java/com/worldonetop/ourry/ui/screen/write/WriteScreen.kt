@@ -40,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,6 +63,7 @@ import com.worldonetop.ourry.ui.theme.Gray30
 import com.worldonetop.ourry.ui.theme.Gray60
 import com.worldonetop.ourry.ui.theme.Gray70
 import com.worldonetop.ourry.ui.theme.LargeTextStyle
+import com.worldonetop.ourry.ui.theme.Primary20
 import com.worldonetop.ourry.ui.theme.Primary60
 import com.worldonetop.ourry.ui.theme.SmallTextStyle
 import com.worldonetop.ourry.ui.theme.default_horizontal_padding
@@ -391,6 +393,8 @@ private fun RowInput(
     maxLength: Int? = null,
     onDelete: (() -> Unit)? = null,
 ) {
+    var isFocus by remember { mutableStateOf(false)}
+
     Column {
         headerText?.let {
             Text(
@@ -407,6 +411,13 @@ private fun RowInput(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = default_horizontal_padding)
+                .conditional(isFocus){
+                    border(
+                        1.dp,
+                        Primary20,
+                        RoundedCornerShape(8.dp)
+                    )
+                }
         ) {
             InputField(
                 modifier = Modifier
@@ -416,9 +427,10 @@ private fun RowInput(
                     .conditional(maxLength != null) {
                         padding(bottom = 20.dp)
                     }
+                    .onFocusChanged { isFocus = it.isFocused }
                 ,
                 value = value,
-                onValueChange = { if(maxLength == null || value.length < maxLength) onValueChange(it) },
+                onValueChange = { if(maxLength == null || it.length <= maxLength) onValueChange(it) },
                 contentPadding = PaddingValues(
                     horizontal = default_horizontal_padding,
                     vertical = 8.dp
